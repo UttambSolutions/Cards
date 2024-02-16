@@ -4,6 +4,8 @@ using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Cards.Controllers
 {
@@ -37,6 +39,14 @@ namespace Cards.Controllers
         [HttpPost("Createsystemcard")]
         public async Task<ActionResult<Genericmodel>> Createsystemcard([FromBody] Systemcards Systemcard)
         {
+            if (!string.IsNullOrEmpty(Systemcard.Cardcolor))
+            {
+                // Use regular expression to validate the color format
+                if (!Regex.IsMatch(Systemcard.Cardcolor, @"^#[0-9a-fA-F]{6}$"))
+                {
+                    return BadRequest("Color should be 6 alphanumeric characters prefixed with a #.");
+                }
+            }
             var data = await bl.Createsystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
         }
@@ -49,6 +59,14 @@ namespace Cards.Controllers
         [HttpPut("Updatesystemcard")]
         public async Task<ActionResult<Genericmodel>> Updatesystemcard([FromBody] Systemcards Systemcard)
         {
+            if (!string.IsNullOrEmpty(Systemcard.Cardcolor))
+            {
+                // Use regular expression to validate the color format
+                if (!Regex.IsMatch(Systemcard.Cardcolor, @"^#[0-9a-fA-F]{6}$"))
+                {
+                    return BadRequest("Color should be 6 alphanumeric characters prefixed with a #.");
+                }
+            }
             var data = await bl.Updatesystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
         }
