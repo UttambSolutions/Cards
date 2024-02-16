@@ -14,6 +14,8 @@ namespace DBL.Entities
         public string? Cardcolor { get; set; }
         public string? Carddescription { get; set; }
         public long Statusid { get; set; }
+        public long Modifiedby { get; set; }
+        public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
     }
 }

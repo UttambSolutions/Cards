@@ -23,21 +23,21 @@ namespace Cards.Controllers
         }
         #region Card Management
         [HttpGet("Getallsystemcard/{Offset}/{Count}/{Search?}")]
-        
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getallsystemcard(int Offset,int Count, string? Search)
         {
             var data = await bl.Getallsystemcard(Offset, Count,Search);
             return Ok(data);
         }
         [HttpGet("Getusersystemcard/{Userid}/{Offset}/{Count}/{Search?}")]
-      
+        [Authorize(Roles = "Member")]
         public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getusersystemcard(long Userid,int Offset, int Count, string? Search)
         {
             var data = await bl.Getusersystemcard(Userid, Offset, Count, Search);
             return Ok(data);
         }
         [HttpPost("Createsystemcard")]
-        public async Task<ActionResult<Genericmodel>> Createsystemcard(Systemcards Systemcard)
+        public async Task<ActionResult<Genericmodel>> Createsystemcard([FromBody] Systemcards Systemcard)
         {
             var data = await bl.Createsystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
@@ -49,7 +49,7 @@ namespace Cards.Controllers
             return Ok(data); 
         }
         [HttpPut("Updatesystemcard")]
-        public async Task<ActionResult<Genericmodel>> Updatesystemcard(Systemcards Systemcard)
+        public async Task<ActionResult<Genericmodel>> Updatesystemcard([FromBody] Systemcards Systemcard)
         {
             var data = await bl.Updatesystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
