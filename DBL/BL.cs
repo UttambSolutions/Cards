@@ -1,4 +1,5 @@
-﻿using DBL.Helpers;
+﻿using DBL.Entities;
+using DBL.Helpers;
 using DBL.Models;
 using DBL.UOW;
 
@@ -53,5 +54,32 @@ namespace DBL
         }
         #endregion
 
+        #region System Cards
+        public Task<Genericmodel> Createsystemcard(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Createsystemcard(obj);
+                return Resp;
+            });
+        }
+       
+        public Task<Systemcards> Getsystemcardbycardid(long Cardid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Getsystemcardbycardid(Cardid);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Updatesystemcard(string obj)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Updatesystemcard(obj);
+                return Resp;
+            });
+        }
+        #endregion
     }
 }

@@ -2,9 +2,9 @@
 {
     public class Util
     {
-        public static string AuthorizationConnectionString(IConfiguration config)
+        public static string ConnectionString(IConfiguration config)
         {
-            return config["ConnectionStrings:AuthorizationDatabaseConnection"];
+            return config["ConnectionStrings:DatabaseConnection"];
         }
     }
 }

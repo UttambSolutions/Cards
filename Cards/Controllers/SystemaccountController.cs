@@ -20,7 +20,7 @@ namespace Cards.Controllers
         IConfiguration _config;
         public SystemaccountController(IConfiguration config)
         {
-            bl = new BL(Util.AuthorizationConnectionString(config));
+            bl = new BL(Util.ConnectionString(config));
             _config = config;
         }
         [AllowAnonymous]
