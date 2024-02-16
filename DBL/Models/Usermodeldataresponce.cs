@@ -2,9 +2,8 @@
 {
     public class Usermodeldataresponce
     {
-        public int Userid { get; set; }
-        public string? Firstname { get; set; }
-        public string? Lastname { get; set; }
+        public long Userid { get; set; }
+        public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
         public string? Emailaddress { get; set; }
         public string? Passwords { get; set; }
