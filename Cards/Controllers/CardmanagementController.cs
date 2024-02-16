@@ -22,14 +22,14 @@ namespace Cards.Controllers
             _config = config;
         }
         #region Card Management
-        [HttpGet("Getallsystemcard/{Offset}/{Count}/{Search?}")]
+        [HttpGet("Getallsystemcard")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getallsystemcard(int Offset,int Count, string? Search)
         {
             var data = await bl.Getallsystemcard(Offset, Count,Search);
             return Ok(data);
         }
-        [HttpGet("Getusersystemcard/{Userid}/{Offset}/{Count}/{Search?}")]
+        [HttpGet("Getusersystemcard/{Userid}")]
         [Authorize(Roles = "Member")]
         public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getusersystemcard(long Userid,int Offset, int Count, string? Search)
         {
