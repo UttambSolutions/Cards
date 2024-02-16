@@ -6,6 +6,8 @@
         public string? Fullname { get; set; }
         public string? Phonenumber { get; set; }
         public string? Emailaddress { get; set; }
+        public string? Passwords { get; set; }
+        public string? Passwordhash { get; set; }
         public string? Rolename { get; set; }
         public DateTime Datecreated { get; set; }
         public DateTime Datemodified { get; set; }
