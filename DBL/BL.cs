@@ -55,6 +55,22 @@ namespace DBL
         #endregion
 
         #region System Cards
+        public Task<IEnumerable<Systemcarddatamodel>> Getallsystemcard(int Offset, int Count, string? Search)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Getallsystemcard(Offset, Count, Search);
+                return Resp;
+            });
+        }
+        public Task<IEnumerable<Systemcarddatamodel>> Getusersystemcard(long Userid, int Offset, int Count, string? Search)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Getusersystemcard(Userid, Offset, Count, Search);
+                return Resp;
+            });
+        }
         public Task<Genericmodel> Createsystemcard(string obj)
         {
             return Task.Run(() =>

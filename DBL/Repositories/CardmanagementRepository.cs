@@ -16,6 +16,33 @@ namespace DBL.Repositories
         public CardmanagementRepository(string connectionString) : base(connectionString)
         {
         }
+
+        public IEnumerable<Systemcarddatamodel> Getallsystemcard(int Offset, int Count, string? Search)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Offset", Offset);
+                parameters.Add("@Count", Count);
+                parameters.Add("@Search", Search);
+                return connection.Query<Systemcarddatamodel>("Usp_Getallsystemcarddata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+        public IEnumerable<Systemcarddatamodel> Getusersystemcard(long Userid, int Offset, int Count, string? Search)
+        {
+            using (var connection = new SqlConnection(_connString))
+            {
+                connection.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Userid", Userid);
+                parameters.Add("@Offset", Offset);
+                parameters.Add("@Count", Count);
+                parameters.Add("@Search", Search);
+                return connection.Query<Systemcarddatamodel>("Usp_Getusersystemcarddata", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
         public Genericmodel Createsystemcard(string jsonObjectdata)
         {
             using (var connection = new SqlConnection(_connString))

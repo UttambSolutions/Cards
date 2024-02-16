@@ -42,6 +42,7 @@ namespace Cards.Controllers
                      new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                      new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                      new Claim("UserId", _userData.Usermodel.Userid.ToString()),
+                     new Claim(ClaimTypes.Role, _userData.Usermodel.Rolename)
                  };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Cards.Controllers
 {
@@ -21,14 +22,16 @@ namespace Cards.Controllers
             _config = config;
         }
         #region Card Management
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Systemblogcategorydata>>> Getallsystemcard(int Offset,int Count, string? Search)
+        [HttpGet("Getallsystemcard/{Offset}/{Count}/{Search?}")]
+        
+        public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getallsystemcard(int Offset,int Count, string? Search)
         {
             var data = await bl.Getallsystemcard(Offset, Count,Search);
             return Ok(data);
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Systemblogcategorydata>>> Getusersystemcard(long Userid,int Offset, int Count, string? Search)
+        [HttpGet("Getusersystemcard/{Userid}/{Offset}/{Count}/{Search?}")]
+      
+        public async Task<ActionResult<IEnumerable<Systemcarddatamodel>>> Getusersystemcard(long Userid,int Offset, int Count, string? Search)
         {
             var data = await bl.Getusersystemcard(Userid, Offset, Count, Search);
             return Ok(data);
@@ -39,7 +42,7 @@ namespace Cards.Controllers
             var data = await bl.Createsystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
         }
-        [HttpGet]
+        [HttpGet("Getsystemcardbycardid/{Userid}/{Cardid}")]
         public async Task<ActionResult<Systemcards>> Getsystemcardbycardid(long Userid, long Cardid)
         {
             var data = await bl.Getsystemcardbycardid(Userid,Cardid);
@@ -51,7 +54,7 @@ namespace Cards.Controllers
             var data = await bl.Updatesystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
         }
-        [HttpDelete]
+        [HttpDelete("Deletesystemcardbycardid/{Userid}/{Cardid}")]
         public async Task<ActionResult<Genericmodel>> Deletesystemcardbycardid(long Userid,long Cardid)
         {
             var data = await bl.Deletesystemcardbycardid(Userid,Cardid);
