@@ -21,10 +21,16 @@ namespace Cards.Controllers
             _config = config;
         }
         #region Card Management
-        [HttpGet("Getsystemcard")]
-        public async Task<ActionResult<IEnumerable<Systemblogcategorydata>>> Getsystemcard()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Systemblogcategorydata>>> Getallsystemcard(int Offset,int Count, string? Search)
         {
-            var data = await bl.Getsystemcard();
+            var data = await bl.Getallsystemcard(Offset, Count,Search);
+            return Ok(data);
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Systemblogcategorydata>>> Getusersystemcard(long Userid,int Offset, int Count, string? Search)
+        {
+            var data = await bl.Getusersystemcard(Userid, Offset, Count, Search);
             return Ok(data);
         }
         [HttpPost("Createsystemcard")]
@@ -33,17 +39,23 @@ namespace Cards.Controllers
             var data = await bl.Createsystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
         }
-        [HttpGet("Getsystemcardbycardid/{Cardid:long}")]
-        public async Task<ActionResult<Systemcards>> Getsystemcardbycardid(long Cardid)
+        [HttpGet]
+        public async Task<ActionResult<Systemcards>> Getsystemcardbycardid(long Userid, long Cardid)
         {
-            var data = await bl.Getsystemcardbycardid(Cardid);
-            return data;
+            var data = await bl.Getsystemcardbycardid(Userid,Cardid);
+            return Ok(data); 
         }
         [HttpPut("Updatesystemcard")]
         public async Task<ActionResult<Genericmodel>> Updatesystemcard(Systemcards Systemcard)
         {
             var data = await bl.Updatesystemcard(JsonConvert.SerializeObject(Systemcard));
             return Ok(data);
+        }
+        [HttpDelete]
+        public async Task<ActionResult<Genericmodel>> Deletesystemcardbycardid(long Userid,long Cardid)
+        {
+            var data = await bl.Deletesystemcardbycardid(Userid,Cardid);
+            return Ok(data); 
         }
         #endregion
     }

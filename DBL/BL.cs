@@ -64,11 +64,11 @@ namespace DBL
             });
         }
        
-        public Task<Systemcards> Getsystemcardbycardid(long Cardid)
+        public Task<Systemcards> Getsystemcardbycardid(long Userid, long Cardid)
         {
             return Task.Run(() =>
             {
-                var Resp = db.CardmanagementRepository.Getsystemcardbycardid(Cardid);
+                var Resp = db.CardmanagementRepository.Getsystemcardbycardid(Userid,Cardid);
                 return Resp;
             });
         }
@@ -77,6 +77,14 @@ namespace DBL
             return Task.Run(() =>
             {
                 var Resp = db.CardmanagementRepository.Updatesystemcard(obj);
+                return Resp;
+            });
+        }
+        public Task<Genericmodel> Deletesystemcardbycardid(long Userid, long Cardid)
+        {
+            return Task.Run(() =>
+            {
+                var Resp = db.CardmanagementRepository.Deletesystemcardbycardid(Userid,Cardid);
                 return Resp;
             });
         }
