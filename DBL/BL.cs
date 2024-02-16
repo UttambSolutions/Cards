@@ -22,39 +22,18 @@ namespace DBL
             {
                 Usermodelresponce userModel = new Usermodelresponce { };
                 var resp = db.SystemaccountRepository.VerifySystemStaff(userName);
-                if (resp.RespStatus == 0)
+                if (resp != null)
                 {
                     Encryptdecrypt sec = new Encryptdecrypt();
-                    string descpass = sec.Decrypt(resp.Usermodel.Passwords, resp.Usermodel.Passwordharsh);
+                    string descpass = sec.Decrypt(resp.Passwords, resp.Passwordhash);
                     if (password == descpass)
                     {
                         userModel = new Usermodelresponce
                         {
-                            RespStatus = resp.RespStatus,
-                            RespMessage = resp.RespMessage,
+                            RespStatus = 0,
+                            RespMessage = "Loggedin",
                             Token = "",
-                            Usermodel = new Usermodeldataresponce
-                            {
-                                Staffid = resp.Usermodel.Staffid,
-                                FullName = resp.Usermodel.FullName,
-                                PhoneNumber = resp.Usermodel.PhoneNumber,
-                                Username = resp.Usermodel.Username,
-                                EmailAddress = resp.Usermodel.EmailAddress,
-                                RoleId = resp.Usermodel.RoleId,
-                                RoleName = resp.Usermodel.RoleName,
-                                Passwordharsh = resp.Usermodel.Passwordharsh,
-                                Passwords = resp.Usermodel.Passwords,
-                                IsActive = resp.Usermodel.IsActive,
-                                IsDeleted = resp.Usermodel.IsDeleted,
-                                LoginStatus = resp.Usermodel.LoginStatus,
-                                Lastpasswordchangedate = resp.Usermodel.Lastpasswordchangedate,
-                                CreatedBy = resp.Usermodel.CreatedBy,
-                                ModifiedBy = resp.Usermodel.ModifiedBy,
-                                Lastlogindate = resp.Usermodel.Lastlogindate,
-                                DateModified = resp.Usermodel.DateModified,
-                                DateCreated = resp.Usermodel.DateCreated,
-                                Permission = resp.Usermodel.Permission
-                            }
+                            Usermodel = resp,
                         };
                         return userModel;
                     }

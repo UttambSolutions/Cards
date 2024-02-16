@@ -1,7 +1,11 @@
-﻿using DBL.Entities;
+﻿using DBL;
+using DBL.Entities;
+using DBL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
@@ -9,6 +13,7 @@ namespace Cards.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SystemaccountController : ControllerBase
     {
         private readonly BL bl;
@@ -34,10 +39,9 @@ namespace Cards.Controllers
             if (_userData.RespStatus == 2)
                 return StatusCode(StatusCodes.Status500InternalServerError, _userData.RespMessage);
             var claims = new[] {
-                     new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
                      new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                      new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                     new Claim("UserId", _userData.Usermodel.Staffid.ToString()),
+                     new Claim("UserId", _userData.Usermodel.Userid.ToString()),
                  };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

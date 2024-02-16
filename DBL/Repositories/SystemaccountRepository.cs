@@ -10,15 +10,15 @@ namespace DBL.Repositories
         public SystemaccountRepository(string connectionString) : base(connectionString)
         {
         }
-        public Usermodelresponce VerifySystemStaff(string Username)
+        public Usermodeldataresponce VerifySystemStaff(string Username)
         {
             using (var connection = new SqlConnection(_connString))
             {
                 connection.Open();
-                Usermodelresponce resp = new Usermodelresponce();
+                Usermodeldataresponce resp = new Usermodeldataresponce();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Username", Username);
-                return connection.Query<Usermodelresponce>("Usp_Uttambsolutionverifysystemcustomer", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return connection.Query<Usermodeldataresponce>("Usp_Verifysystemstaff", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
         }
     }
