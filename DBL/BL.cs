@@ -33,16 +33,7 @@ namespace DBL
                             RespStatus = 0,
                             RespMessage = "Loggedin",
                             Token = "",
-                            Usermodel = new Usermodeldataresponce
-                            {
-                                Userid = resp.Userid,
-                                Fullname = resp.Fullname,
-                                Phonenumber = resp.Phonenumber,
-                                Emailaddress = resp.Emailaddress,
-                                Rolename = resp.Rolename,
-                                Datecreated = resp.Datecreated,
-                                Datemodified = resp.Datemodified,
-                            },
+                            Usermodel = resp,
                         };
                         return userModel;
                     }
